@@ -1,13 +1,11 @@
-import { useState } from "react";
+import GlobalState from "./Global/GlobalState";
 import Router from "./Router/Router";
 
 function App() {
-  const [page, setPage] = useState(0);
-
   return (
-    <>
+    <GlobalState>
       <Router />
-    </>
+    </GlobalState>
   );
 }
 

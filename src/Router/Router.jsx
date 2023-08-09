@@ -7,11 +7,11 @@ import Header from "../Components/Header/Header";
 export const Router = () => {
   return (
     <BrowserRouter>
-    <Header />
+      <Header />
       <Routes>
         <Route path="/" element={<PokemonListPage />} />
         <Route path="/pokedex" element={<PokedexPage />} />
-        <Route path="/pokemon/:name" element={<PokemonDetailPage />} />
+        <Route path="/details/:name" element={<PokemonDetailPage />} />
       </Routes>
     </BrowserRouter>
   );
