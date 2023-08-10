@@ -5,8 +5,17 @@ import {
   PokeCardContainer,
   PokeImg,
   ImgContainer,
+  InfoContainer,
+  ButtonCapture,
+  ReleaseButton,
+  ButtonDetails,
+  TypeImgContainer,
+  PokeballImg,
 } from "./styled";
 import { useLocation, useNavigate } from "react-router-dom";
+import { returnTypes } from "../../utils/ReturnTypes";
+import { returnBackground } from "../../utils/returnBackground";
+import Pokeball from "../../../public/assets/pokeball.png";
 
 const PokemonCard = ({ pokemon, addPokemon, removePokemon }) => {
   //* useNavigate e useLocation são usados para navegar para a página de detalhes do pokemon.
@@ -17,6 +26,8 @@ const PokemonCard = ({ pokemon, addPokemon, removePokemon }) => {
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const pokemonNameUpperCase =
+    pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
 
   //* pathname possui a informação do nome do path mencionado nas rotas criadas. Cada rota possui um path e um element, o path é o nome do path e o element é o elemento que será renderizado.
 
@@ -25,22 +36,48 @@ const PokemonCard = ({ pokemon, addPokemon, removePokemon }) => {
   //* No botão renderizado para pathname diferente de "/" ele remove o pokemon do estado de pokedex. Para isso é necessário passar um argumento para a função removePokemon. No caso é o nome do pokemon. Que é proveniente da propriedade pokemon do componente.
 
   //* Todas as informações consumidas nos componentes são puxadas via API. API que por sua vez é passada via estado.
-  
+
   return (
-    <PokeCardContainer>
+    <PokeCardContainer type={returnBackground(pokemon.types[0].type.name)}>
+      <InfoContainer>
+        <p>
+          #{pokemon.id.toString().length === 1 ? `0${pokemon.id}` : pokemon.id}
+        </p>
+        <h1>{pokemonNameUpperCase}</h1>
+        <div>
+          {pokemon.types.map((type, index) => {
+            return (
+              <TypeImgContainer
+                src={returnTypes(type.type.name)}
+                alt={type.type.name}
+                key={index}
+              />
+            );
+          })}
+        </div>
+      </InfoContainer>
       <ImgContainer>
-        <PokeImg src={pokemon.sprites.front_default} alt={pokemon.name} />
+        <PokeballImg src={Pokeball} alt={"Pokeball.png"}></PokeballImg>
+        <PokeImg
+          src={pokemon.sprites.other["official-artwork"].front_default}
+          alt={pokemon.name}
+        />
       </ImgContainer>
       <ButtonsContainer>
+        <ButtonDetails
+          onClick={() => goToPokemonDetailPage(navigate, pokemon.name)}
+        >
+          Detalhes
+        </ButtonDetails>
         {pathname === "/" ? (
-          <button onClick={() => addPokemon(pokemon)}>Adicionar</button>
+          <ButtonCapture onClick={() => addPokemon(pokemon)}>
+            Capturar!
+          </ButtonCapture>
         ) : (
-          <button onClick={() => removePokemon(pokemon.name)}>Remover</button>
+          <ReleaseButton onClick={() => removePokemon(pokemon.name)}>
+            Excluir
+          </ReleaseButton>
         )}
-
-        <button onClick={() => goToPokemonDetailPage(navigate, pokemon.name)}>
-          Ver detalhes
-        </button>
       </ButtonsContainer>
     </PokeCardContainer>
   );
