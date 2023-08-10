@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getAllPokemons = (setData) => {
   axios
-    .get("https://pokeapi.co/api/v2/pokemon?limit=20&offset=0")
+    .get("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0")
     .then((res) => {
       const pokeResults = res.data.results;
       const newRequest = pokeResults.map((poke) => axios.get(poke.url));
