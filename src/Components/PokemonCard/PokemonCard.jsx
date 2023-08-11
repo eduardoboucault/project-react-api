@@ -67,15 +67,15 @@ const PokemonCard = ({ pokemon, addPokemon, removePokemon }) => {
         <ButtonDetails
           onClick={() => goToPokemonDetailPage(navigate, pokemon.name)}
         >
-          Detalhes
+          Details
         </ButtonDetails>
         {pathname === "/" ? (
           <ButtonCapture onClick={() => addPokemon(pokemon)}>
-            Capturar!
+            Capture!
           </ButtonCapture>
         ) : (
           <ReleaseButton onClick={() => removePokemon(pokemon.name)}>
-            Excluir
+            Release
           </ReleaseButton>
         )}
       </ButtonsContainer>

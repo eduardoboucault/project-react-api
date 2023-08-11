@@ -11,7 +11,7 @@ const PokedexPage = () => {
   const { pokedex, removePokemon } = useContext(GlobalStateContext);
   return (
     <PokedexContainer>
-      <PokemonTitlePokedexPage>Meus Pokémons</PokemonTitlePokedexPage>
+      <PokemonTitlePokedexPage>My Pokémons</PokemonTitlePokedexPage>
       <SectionPokemonsPokedex>
         {pokedex.map((poke) => {
           return (

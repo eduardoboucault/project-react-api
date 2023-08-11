@@ -1,6 +1,14 @@
 import styled from "styled-components";
 
-export const PokeInfosContainer = styled.main`
+export const MainDetailsContainer = styled.main`
+  background-color: #5d5d5d;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  background-color: #5d5d5d;
+`;
+
+export const PokeInfosContainer = styled.div`
   height: 663px;
   width: 1389.14px;
   border-radius: 10px;
@@ -45,7 +53,7 @@ export const StatsContainer = styled.div`
   background: #f1f1f1;
   align-self: center;
   height: 75%;
-  width: 300px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -86,7 +94,7 @@ export const MovesContainer = styled.div`
   z-index: 1;
   p {
     background-color: #ececec;
-    max-width: 40%;
+    max-width: 50%;
     height: 40px;
     border-radius: 10px;
     border: 1px dashed rgba(0, 0, 0, 0.5);
@@ -102,6 +110,31 @@ export const TypeImgContainer = styled.img`
   margin: 3px;
 `;
 
-export const ProgressBarStats = styled.div`
-  height: 70%;
+export const ProgressBarStatsContainer = styled.div`
+  height: 50%;
+  section {
+    display: grid;
+    grid-template-columns: 2fr 1fr 3fr;
+  }
+`;
+
+export const DivProgress = styled.div`
+  width: 100%;
+`;
+
+export const ProgressBar = styled.div`
+  height: 10px;
+  background-color: #ff7c2e;
+  width: ${(props) => props.widthbar}%;
+  border-radius: 10px;
+`;
+
+export const PStatsName = styled.p`
+  display: flex;
+  justify-content: end;
+`;
+
+export const PStatsNumber = styled.p`
+  display: flex;
+  justify-content: center;
 `;

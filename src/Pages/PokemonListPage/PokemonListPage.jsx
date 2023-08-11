@@ -25,7 +25,7 @@ const PokemonListPage = () => {
 
   return (
     <PokemonListContainer>
-      <PokemonTitleListPage>Todos Pokémons</PokemonTitleListPage>
+      <PokemonTitleListPage>All Pokémons</PokemonTitleListPage>
       <SectionPokemons>
         {filteredPokemons.map((pokemon) => (
           <PokemonCard

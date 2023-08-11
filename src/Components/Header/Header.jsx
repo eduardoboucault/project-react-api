@@ -24,12 +24,15 @@ const Header = () => {
 
   let pokeName = pathname.split("/")[2];
 
-  const { pokedex, setPokedex, removePokemon } = useContext(GlobalStateContext);
+  const { pokedex, setPokedex, removePokemon, setControlModal, setIsOpen } =
+    useContext(GlobalStateContext);
 
   //* O motivo de usar uma função anônima nesse caso é porque você precisa passar argumentos extras para a função setData. A função setData aceita um argumento que é o novo valor do estado, mas você também precisa do pokedex atual para atualizar corretamente a lista. Portanto, você cria uma função anônima que recebe o data (os detalhes do Pokémon) como seu próprio parâmetro, e também tem acesso ao pokedex atual. Você então combina os detalhes do Pokémon com o pokedex atual, criando uma nova lista que inclui o novo Pokémon. Essa nova lista é então passada para setData, atualizando assim o estado.
 
   //* Em resumo, a função anônima é uma forma de criar um contexto onde você tem acesso tanto aos detalhes do Pokémon quanto ao estado pokedex, permitindo que você atualize o estado de acordo com os detalhes obtidos da API.
   const addPokedex = (name) => {
+    setIsOpen(true);
+    setControlModal(1);
     getPokemonByName(name, (data) => {
       setPokedex([...pokedex, data]);
     });
@@ -38,10 +41,10 @@ const Header = () => {
   if (pathname === "/") {
     nextPage = () => goToPokedexPage(navigate);
   } else if (pathname === "/pokedex") {
-    titleButtonLeft = "Todos Pokémons";
+    titleButtonLeft = "All Pokémons";
     nextPage = () => goToPokemonListPage(navigate);
   } else if (pathname.includes("/details/")) {
-    titleButtonLeft = "Todos Pokémons";
+    titleButtonLeft = "All Pokémons";
     nextPage = () => goToPokemonListPage(navigate);
   }
 
@@ -62,11 +65,11 @@ const Header = () => {
         {pathname.includes("/details/") &&
           (isPokemonInPokedex ? (
             <RemoveButtonStyle onClick={() => removePokemon(pokeName)}>
-              Excluir da Pokédex
+              Delete from Pokédex
             </RemoveButtonStyle>
           ) : (
             <AddButtonStyle onClick={() => addPokedex(pokeName)}>
-              Capturar Pokémon
+              Capture Pokémon
             </AddButtonStyle>
           ))}
       </HeaderContainer>

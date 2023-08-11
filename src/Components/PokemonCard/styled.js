@@ -61,6 +61,7 @@ export const ButtonCapture = styled.button`
   margin-right: 15px;
   z-index: 1;
   transition: box-shadow 0.3s ease;
+  color: black;
 
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -88,6 +89,9 @@ export const InfoContainer = styled.section`
   flex-direction: column;
   height: 60%;
   margin: 25px 0 0 25px;
+  p{
+    font-weight: bold;
+  }
 `;
 
 export const PokeballImg = styled.img`

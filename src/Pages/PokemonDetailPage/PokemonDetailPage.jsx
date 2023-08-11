@@ -13,7 +13,12 @@ import {
   TypeImgContainer,
   PokeImg,
   PokeballImg,
-  ProgressBarStats,
+  ProgressBarStatsContainer,
+  ProgressBar,
+  PStatsName,
+  PStatsNumber,
+  DivProgress,
+  MainDetailsContainer,
 } from "./styled";
 import Pokeball from "../../../public/assets/pokeball.png";
 import { returnBackground } from "../../utils/returnBackground";
@@ -50,59 +55,85 @@ const PokemonDetailPage = () => {
 
   return (
     <>
-      <PokeInfosContainer color={pokemonType}>
-        <PokeballImg src={Pokeball} alt="pokeball" />
+      <MainDetailsContainer>
+        <PokeInfosContainer color={pokemonType}>
+          <PokeballImg src={Pokeball} alt="pokeball" />
 
-        <PokeImg
-          src={pokemon.sprites?.other["official-artwork"].front_default}
-          alt={pokemon?.name}
-        />
-        <ImagesContainer>
-          <ImgWarpper src={pokemon.sprites?.front_default} alt={pokemon.name} />
+          <PokeImg
+            src={pokemon.sprites?.other["official-artwork"].front_default}
+            alt={pokemon?.name}
+          />
+          <ImagesContainer>
+            <ImgWarpper
+              src={pokemon.sprites?.front_default}
+              alt={pokemon.name}
+            />
 
-          <ImgWarpper src={pokemon.sprites?.back_default} alt={pokemon.name} />
-        </ImagesContainer>
+            <ImgWarpper
+              src={pokemon.sprites?.back_default}
+              alt={pokemon.name}
+            />
+          </ImagesContainer>
 
-        <StatsContainer>
-          <TitleContainer>Base Stats</TitleContainer>
-
-          <ProgressBarStats>
-            {pokemon.stats?.map((stat, index) => {
-              return (
-                <div>
-                  <p key={index}>{stat.stat.name}</p>
-                  <p>{stat.base_stat}</p>
-                </div>
-              );
-            })}
-          </ProgressBarStats>
-        </StatsContainer>
-
-        <TypeAndMovesContainer>
-          <TypesContainer>
-            <p>#{pokemonId}</p>
-            <h1>{pokemonName}</h1>
-            <div>
-              {pokemon.types?.map((type, index) => {
+          <StatsContainer>
+            <TitleContainer>Base Stats</TitleContainer>
+            <ProgressBarStatsContainer>
+              {pokemon.stats?.map((stat, index) => {
                 return (
-                  <TypeImgContainer
-                    key={index}
-                    src={returnTypes(type.type.name)}
-                    alt={type.type.name}
-                  />
+                  <section key={index}>
+                    <PStatsName key={index}>
+                      {stat.stat.name
+                        .split("-")
+                        .map(
+                          (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                        )
+                        .join(" ")}
+                    </PStatsName>
+                    <PStatsNumber>{stat.base_stat}</PStatsNumber>
+                    <DivProgress>
+                      <ProgressBar widthbar={stat.base_stat}></ProgressBar>
+                    </DivProgress>
+                  </section>
                 );
               })}
-            </div>
-          </TypesContainer>
+            </ProgressBarStatsContainer>
+          </StatsContainer>
 
-          <MovesContainer>
-            <TitleContainer>Moves</TitleContainer>
-            {pokemon.moves?.slice(0, 5).map((move, index) => {
-              return <p key={index}>{move.move.name}</p>;
-            })}
-          </MovesContainer>
-        </TypeAndMovesContainer>
-      </PokeInfosContainer>
+          <TypeAndMovesContainer>
+            <TypesContainer>
+              <p>#{pokemonId}</p>
+              <h1>{pokemonName}</h1>
+              <div>
+                {pokemon.types?.map((type, index) => {
+                  return (
+                    <TypeImgContainer
+                      key={index}
+                      src={returnTypes(type.type.name)}
+                      alt={type.type.name}
+                    />
+                  );
+                })}
+              </div>
+            </TypesContainer>
+
+            <MovesContainer>
+              <TitleContainer>Moves</TitleContainer>
+              {pokemon.moves?.slice(0, 5).map((move, index) => {
+                return (
+                  <p key={index}>
+                    {move.move.name
+                      .split("-")
+                      .map(
+                        (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                      )
+                      .join(" ")}
+                  </p>
+                );
+              })}
+            </MovesContainer>
+          </TypeAndMovesContainer>
+        </PokeInfosContainer>
+      </MainDetailsContainer>
     </>
   );
 };

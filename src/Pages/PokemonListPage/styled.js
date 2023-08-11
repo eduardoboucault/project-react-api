@@ -8,11 +8,12 @@ export const PokemonListContainer = styled.div`
 `;
 
 export const PokemonTitleListPage = styled.h1`
-  width: 80%;
-  height: 20%;
+  width: 70%;
+  height: 10vh;
   color: #ffffff;
   margin: auto;
   font-weight: bold;
+  font-size: 40px;
 `;
 
 export const SectionPokemons = styled.section`
